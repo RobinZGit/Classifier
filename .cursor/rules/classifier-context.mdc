@@ -1,0 +1,42 @@
+---
+description: Classifier product context and standing decisions
+alwaysApply: true
+---
+
+# Classifier — project context
+
+Single-file app: `index.html` (HTML+CSS+JS+mammoth). `file://` OK; do not require localhost. Assistant replies in Russian unless the user writes in English.
+
+## Storage modes
+
+1. **IndexedDB** — catalog + file blobs (main working mode after migration).
+2. **External package** — `catalog.json` + `files/<id>/…` + `classifier-package.v1.json` beside the HTML.
+
+Resolve file bytes: IDB blob → file handle → package file. Do **not** trust `hasBlob` from a foreign catalog; check real IDB blobs.
+
+### Package / migration UX
+
+- On `file://`, sibling `fetch` often fails → orange **«Указать папку пакета»** (user click only).
+- When files live on disk and IDB has no blobs → red **«В IndexedDB»** + banner with detailed hint.
+- Never call `showDirectoryPicker` on boot or after `confirm` (Edge user-gesture error).
+- Migration copies into IndexedDB, then deletes only `files/<id>/` under the package folder if writable. Keep HTML + `catalog.json`.
+
+## Full backup
+
+Portable runnable package: `Classifier.html` + `index.html` (DOM snapshot before boot — not `fetch` on `file://`) + `catalog.json` + marker + `files/` + README. Folder backup can resume after F5; ZIP cannot.
+
+## UI notes
+
+- Add buttons on classifier bar: **+** / **+T** / **+✎**. File: Download, Delete; tags under name.
+- Expanding preview scrolls the files list so the row stays in view.
+- Transfer dock: on error show Close / header ×; auto-dismiss errors ~8s.
+
+## Preview
+
+Text, image, audio, video, PDF, DOCX. No DjVu / old `.doc` preview.
+
+## Git / releases
+
+- Commit / push / Release only when Sergey asks.
+- **Before any repo ship:** update `.local/context.md`, `.local/user-instructions.md`, and this rule — then commit/push.
+- Do not commit `.local/` unless Sergey asks. Do not amend published releases unless asked.
