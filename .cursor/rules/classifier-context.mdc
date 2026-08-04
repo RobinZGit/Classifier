@@ -35,8 +35,10 @@ Portable runnable package: `Classifier.html` + `index.html` (DOM snapshot before
 
 Text, image, audio, video, PDF, DOCX. No DjVu / old `.doc` preview.
 
-## Git / releases
+## Git / releases / Pages
 
+- Site: https://robinzgit.github.io/Classifier/
+- Listed on hub: https://robinzgit.github.io/OsEngine/my-projects.html (source: OsEngine `related projects/MultiLogicTradePg/tools/my-projects.html`, deployed by OsEngine Pages workflow).
 - Commit / push / Release only when Sergey asks.
 - **Before any repo ship:** update `.local/context.md`, `.local/user-instructions.md`, and this rule — then commit/push.
 - Do not commit `.local/` unless Sergey asks. Do not amend published releases unless asked.
